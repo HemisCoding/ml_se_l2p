@@ -81,3 +81,67 @@ Cannot access class or instance data
 | `__getitem__`           | Allow indexing like `obj[0]`              |
 | `__iter__`              | Make your object iterable                 |
 | `__enter__`, `__exit__` | For `with` context managers               |
+
+
+Magic Methods (Dunder Methods) in Python OOP
+Method	Purpose	Example Usage
+
+🔹 __str__(self)
+Called by str(obj) or print(obj)
+
+Should return a user-friendly string describing the object
+
+def __str__(self):
+    return f"User: {self.name}"
+
+
+🔹 __repr__(self)
+Called in interactive shells, debugging, logs
+
+Should return a developer-friendly string that ideally could be used to recreate the object
+def __repr__(self):
+    return f"AccountManager('{self.name}', '{self.email}')"
+✅ Best practice: if you define only __repr__, it will also be used for print() unless __str__ is defined.
+
+🔹 __eq__(self, other)
+Defines behavior for ==
+
+Useful to compare two objects by value, not identity
+
+def __eq__(self, other):
+    return self.name == other.name and self.email == other.email
+🔹 __lt__, __gt__, __le__, __ge__
+Define behavior for <, >, <=, >=
+
+Used when sorting or comparing objects
+def __lt__(self, other):
+    return self.age < other.age
+
+🔹 __len__(self)
+Called by len(obj)
+Used to define a custom “length” for your object
+def __len__(self):
+    return len(self.items)
+
+🔹 __getitem__(self, key)
+Allows your object to be indexable like a list or dict (obj[key])
+
+def __getitem__(self, index):
+    return self.items[index]
+
+🔹 __iter__(self)
+Makes your object iterable, so it can be used in a for loop
+def __iter__(self):
+    return iter(self.items)
+🔁 Often used together with __next__() in custom iterator objects.
+
+🔹 __enter__, __exit__
+Enable use of your class in a with block (context manager)
+def __enter__(self):
+    print("Opening resource")
+    return self
+
+def __exit__(self, exc_type, exc_val, exc_tb):
+    print("Closing resource")
+with MyResource() as r:
+    r.do_something()

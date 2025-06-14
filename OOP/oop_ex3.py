@@ -1,3 +1,6 @@
+## Instance vs Class vs Static Methods
+# Exercise 3: Create a User class
+
 # Track total number of users with a class variable
 
 # Define:
